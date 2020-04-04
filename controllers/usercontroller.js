@@ -12,11 +12,13 @@ router.post("/createuser", function(req, res) {
   var userName = req.body.user.username;
   var password = req.body.user.password;
   var newEmail= req.body.user.newEmail;
+  var userType = 1;
 
   User.create({
     username: userName,
     passwordhash: bcrypt.hashSync(password, 10),
-    newEmail: newEmail 
+    newEmail: newEmail,
+    userType: userType
   }).then(
     function createSuccess(user) {
       var token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
