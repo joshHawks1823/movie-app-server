@@ -72,4 +72,29 @@ router.post("/signin", function(req,res){
 
 })
 
+router.get('/adminportal', function(req,res) {
+
+  User.findAll({}
+  ).then(users => {
+
+      res.send(users)
+  })
+})
+
+router.delete("/delete/:user", function(req, res) {
+  // var user = req.body.user.username
+
+  var user = req.params.user;
+
+  // var matchOwner = req.user.id;
+
+  User.destroy({
+      where: { username: user }
+    })
+    .then(data => {
+      return data > 0 ? res.json(data) : res.send("Nothing deleted");
+    }),
+    err => res.send(500, err.message);
+});
+
 module.exports = router;
