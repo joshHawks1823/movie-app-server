@@ -19,20 +19,19 @@ router.get('/saved', function (req, res){
 })
 
 router.post('/createsaved', function (req, res){
-    let movie_id = req.body.movie.movie_id;
-    let name = req.body.movie.name;
-    let poster = req.body.movie.poster;
-    let description = req.body.movie.description;
-    let release_date = req.user.release_date;
-    let rating = req.body.movie.rating;
+    let imdbID = req.body.movie.imdbID;
+    let Title = req.body.movie.Title;
+    let Plot = req.body.movie.Plot;
+    let Year = req.body.movie.Year;
+    let Poster = req.body.movie.Poster
     
     logModel.create({
-        movie_id: movie_id,
-        name: name,
-        poster: poster,
-        description: description,
-        release_date: release_date,
-        rating: rating,
+        imdbID: imdbID,
+        Title: Title,
+        Plot: Plot,
+        Year: Year,
+        Poster: Poster
+
         
 
         
