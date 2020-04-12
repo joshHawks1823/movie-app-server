@@ -3,7 +3,7 @@ let router = express.Router();
 let sequelize = require('../db')
 let logModel = sequelize.import('../models/saved.js');
 
-
+//Click to add to our watchlist
 //change from 'log'
 router.get('/saved', function (req, res){
     let userid = req.user.id;
