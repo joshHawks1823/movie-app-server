@@ -8,7 +8,7 @@ module.exports= function(sequelize, DataTypes){
         Poster: DataTypes.STRING,
         Rating: DataTypes.STRING,
         Comments: DataTypes.STRING,
-        Owner: DataTypes.INTEGER
+        owner: DataTypes.INTEGER
 
     })
 }

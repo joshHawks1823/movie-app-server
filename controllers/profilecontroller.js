@@ -19,11 +19,11 @@ router.get('/profiles', function (req, res){
 })
 
 router.post('/createpost', function (req, res){
-    let imdbID = req.body.movie.imdbID;
-    let Title = req.body.movie.Title;
-    let Plot = req.body.movie.Plot;
-    let Year = req.body.movie.Year;
-    let Poster = req.body.movie.Poster;
+    let imdbID = req.body.profiles.imdbID;
+    let Title = req.body.profiles.Title;
+    let Plot = req.body.profiles.Plot;
+    let Year = req.body.profiles.Year;
+    let Poster = req.body.profiles.Poster;
     let Rating = req.body.profiles.Rating;
     let Comments= req.body.profiles.Comments
     let owner= req.user.id
