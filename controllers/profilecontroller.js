@@ -4,7 +4,7 @@ let sequelize = require('../db')
 let logModel = sequelize.import('../models/profiles.js');
 
 
-
+//movies watched
 router.get('/profiles', function (req, res){
     let userid = req.user.id;
     logModel.findAll({
@@ -19,24 +19,23 @@ router.get('/profiles', function (req, res){
 })
 
 router.post('/createpost', function (req, res){
-    let movie_id = req.body.profiles.movie_id;
-    let name = req.body.profiles.name;
-    let poster = req.body.profiles.poster;
-    let description = req.body.profiles.description;
-    let release_date = req.body.profiles.release_date;
-    let rating = req.body.profiles.rating
-    let ranking= req.body.profiles.ranking;
-    let comments= req.body.profiles.comments;
+    
+    let Title = req.body.movie.Title;
+    let Plot = req.body.movie.Plot;
+    let Year = req.body.movie.Year;
+    let Poster = req.body.movie.Poster;
+
+    let Rating = req.body.profiles.Rating;
+    let Comments= req.body.profiles.Comments
     let owner= req.user.id
     logModel.create({
-        movie_id: movie_id,
-        name: name,
-        poster: poster,
-        description: description,
-        release_date: release_date,
-        rating: rating,
-        ranking: ranking,
-        comments: comments,
+        
+        Title: Title,
+        Plot: Plot,
+        Year: Year,
+        Poster: Poster,
+        Rating: Rating,
+        Comments: Comments,
         owner: owner
         
     }).then(
@@ -59,8 +58,8 @@ router.delete('/movie/delete/:id', function(req,res){
     }).then(
         data => {
             return data > 0
-            ? res.send('Item was deleted')
-            : res.send('Nothing deleted')
+            ? res.send({message:'Item was deleted'})
+            : res.send({message:'Nothing deleted'})
         }),err => res.send(500, err.message);
 });
 
@@ -78,24 +77,23 @@ router.get('/movie/:id', function(req, res) {
 
 
 router.put('/movie/update/:id', function(req,res){
-    let movie_id = req.body.profiles.movie_id;
-    let name = req.body.profiles.name;
-    let poster = req.body.profiles.poster;
-    let description = req.body.profiles.description;
-    let release_date = req.body.profiles.release_date;
-    let rating = req.body.profiles.rating
-    let ranking= req.body.profiles.ranking;
-    let comments= req.body.profiles.comments
+    let imdbID = req.body.movie.imdbID;
+    let Title = req.body.movie.Title;
+    let Plot = req.body.movie.Plot;
+    let Year = req.body.movie.Year;
+    let Poster = req.body.movie.Poster;
+    let Rating = req.body.profiles.Rating;
+    let Comments= req.body.profiles.Comments;
     let owner=userid=req.user.id
     logModel.update({
-        movie_id: movie_id,
-        name: name,
-        poster: poster,
-        description: description,
-        release_date: release_date,
-        rating: rating,
-        ranking: ranking,
-        comments: comments
+        imdbID: imdbID,
+        Title: Title,
+        Plot: Plot,
+        Year: Year,
+        Poster: Poster,
+        Rating: Rating,
+        Comments: Comments,
+        owner: owner
 
     },{ where: { id: primaryKey, owner: userid }}
     ).then(

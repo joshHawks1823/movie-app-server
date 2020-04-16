@@ -3,6 +3,7 @@ module.exports= function(sequelize, DataTypes){
     
         username: DataTypes.STRING,
         newEmail: DataTypes.STRING,
-        passwordhash: DataTypes.STRING
+        passwordhash: DataTypes.STRING,
+        userType: DataTypes.INTEGER
     })
     }
