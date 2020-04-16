@@ -5,8 +5,8 @@ module.exports= function(sequelize, DataTypes){
         Title: DataTypes.STRING,
         Plot: DataTypes.STRING,
         Year: DataTypes.STRING,
-        Poster: DataTypes.STRING
-       
+        Poster: DataTypes.STRING,
+        owner: DataTypes.INTEGER
        
       
 

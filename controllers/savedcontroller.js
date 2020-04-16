@@ -23,15 +23,16 @@ router.post('/createsaved', function (req, res){
     let Title = req.body.movie.Title;
     let Plot = req.body.movie.Plot;
     let Year = req.body.movie.Year;
-    let Poster = req.body.movie.Poster
+    let Poster = req.body.movie.Poster;
+    let owner = req.user.id
     
     logModel.create({
         imdbID: imdbID,
         Title: Title,
         Plot: Plot,
         Year: Year,
-        Poster: Poster
-
+        Poster: Poster,
+        owner:owner
         
 
         
@@ -55,8 +56,8 @@ router.delete('/movie/delete/:id', function(req,res){
     }).then(
         data => {
             return data > 0
-            ? res.send('Item was deleted')
-            : res.send('Nothing deleted')
+            ? res.send({message:'Item was deleted'})
+            : res.send({message:'Nothing deleted'})
         }),err => res.send(500, err.message);
 });
 
