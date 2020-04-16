@@ -24,6 +24,7 @@ router.post('/createpost', function (req, res){
     let Plot = req.body.movie.Plot;
     let Year = req.body.movie.Year;
     let Poster = req.body.movie.Poster;
+
     let Rating = req.body.profiles.Rating;
     let Comments= req.body.profiles.Comments
     let owner= req.user.id
