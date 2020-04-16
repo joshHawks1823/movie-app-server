@@ -4,7 +4,7 @@ let sequelize = require('../db')
 let logModel = sequelize.import('../models/profiles.js');
 
 
-
+//movies watched
 router.get('/profiles', function (req, res){
     let userid = req.user.id;
     logModel.findAll({
@@ -19,16 +19,17 @@ router.get('/profiles', function (req, res){
 })
 
 router.post('/createpost', function (req, res){
-    let imdbID = req.body.profiles.imdbID;
-    let Title = req.body.profiles.Title;
-    let Plot = req.body.profiles.Plot;
-    let Year = req.body.profiles.Year;
-    let Poster = req.body.profiles.Poster;
+    
+    let Title = req.body.movie.Title;
+    let Plot = req.body.movie.Plot;
+    let Year = req.body.movie.Year;
+    let Poster = req.body.movie.Poster;
+
     let Rating = req.body.profiles.Rating;
     let Comments= req.body.profiles.Comments
     let owner= req.user.id
     logModel.create({
-        imdbID: imdbID,
+        
         Title: Title,
         Plot: Plot,
         Year: Year,
@@ -57,8 +58,8 @@ router.delete('/movie/delete/:id', function(req,res){
     }).then(
         data => {
             return data > 0
-            ? res.send('Item was deleted')
-            : res.send('Nothing deleted')
+            ? res.send({message:'Item was deleted'})
+            : res.send({message:'Nothing deleted'})
         }),err => res.send(500, err.message);
 });
 
@@ -82,7 +83,7 @@ router.put('/movie/update/:id', function(req,res){
     let Year = req.body.movie.Year;
     let Poster = req.body.movie.Poster;
     let Rating = req.body.profiles.Rating;
-    let Comments= req.body.profiles.Comments
+    let Comments= req.body.profiles.Comments;
     let owner=userid=req.user.id
     logModel.update({
         imdbID: imdbID,
