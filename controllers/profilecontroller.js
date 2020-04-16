@@ -17,6 +17,18 @@ router.get('/profiles', function (req, res){
         }
     )
 })
+router.get('/review', function (req, res){
+    let userid = req.user.id;
+    savedMovie.findAll({
+        where: {ownerId: userid.toString()}
+    }).then(
+        function findAllSuccess(data){
+            res.json(data);
+        },function findAllError(err){
+            res.send(500, err);
+        }
+    )
+})
 
 router.post('/createpost', function (req, res){
     
@@ -77,30 +89,19 @@ router.get('/movie/:id', function(req, res) {
 
 
 router.put('/movie/update/:id', function(req,res){
-    let imdbID = req.body.movie.imdbID;
-    let Title = req.body.movie.Title;
-    let Plot = req.body.movie.Plot;
-    let Year = req.body.movie.Year;
-    let Poster = req.body.movie.Poster;
-    let Rating = req.body.profiles.Rating;
-    let Comments= req.body.profiles.Comments;
+       let Comments= req.body.profiles.Comments
     let owner=userid=req.user.id
-    logModel.update({
-        imdbID: imdbID,
-        Title: Title,
-        Plot: Plot,
-        Year: Year,
-        Poster: Poster,
-        Rating: Rating,
+    console.log(owner, req.params.id)
+    savedMovie.update({
         Comments: Comments,
-        owner: owner
+        
 
-    },{ where: { id: primaryKey, owner: userid }}
+    },{ where: { id: req.params.id}}
     ).then(
         data => {
             return data > 0
-                ? res.send("Item updated!")
-                : res.send("No updates where made.")
+                ? res.json(data)
+                : res.json(data)
         }),
         err => res.send(500, err.message)
 })
